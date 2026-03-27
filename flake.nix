@@ -16,11 +16,22 @@
     ];
   };
 
-  outputs = { self, nixpkgs, rpi, ... }@ inputs: { 
+  outputs = { self, nixpkgs, rpi, ... }@ inputs: 
+  let
+    system = "aarch64-linux";
+  in { 
     nixosConfigurations = {
+      inherit system;
+
       lulu = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        modules = [ ./configuration.nix ];
+        modules = [ 
+          rpi.nixosModules.raspberry-pi-5.base
+          rpi.nixosModules.raspberry-pi-5.page-size-16k
+          rpi.nixosModules.raspberry-pi-5.display-vc4
+          rpi.nixosModules.raspberry-pi-5.bluetooth
+          ./configuration.nix
+        
+        ];
       };
     };
   };
