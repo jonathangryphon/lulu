@@ -31,7 +31,7 @@
           rpi.nixosModules.raspberry-pi-5.display-vc4
           rpi.nixosModules.raspberry-pi-5.bluetooth
 
-          usb-gadget-ethernet # Configures USB Gadget/Ethernet - Ethernet emulation over USB
+          rpi.nixosModules.usb-gadget-ethernet # Configures USB Gadget/Ethernet - Ethernet emulation over USB
 
           ./pi5-configtxt.nix
           
