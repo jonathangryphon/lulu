@@ -16,7 +16,7 @@
     ];
   };
 
-  outputs = { self, nixpkgs, ... }: { 
+  outputs = { self, nixpkgs, rpi, ... }@ inputs: { 
     nixosConfigurations = {
       lulu = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
