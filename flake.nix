@@ -23,7 +23,8 @@
     nixosConfigurations = {
       inherit system;
 
-      lulu = nixpkgs.lib.nixosSystem {
+      lulu = rpi.lib.nixosSystem {
+        specialArgs = inputs;
         modules = [ 
           rpi.nixosModules.raspberry-pi-5.base
           rpi.nixosModules.raspberry-pi-5.page-size-16k
