@@ -15,9 +15,7 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    ./modules/podman.nix
     ./modules/ssh.nix
-    ./modules/traefik.nix
     # Secrets requring modules start here. Import goes top to bottom apparently, so to even use Sops, I need to move it above anything using it. 
     "${sopsNix}/modules/sops"
     ./sops-secrets.nix
