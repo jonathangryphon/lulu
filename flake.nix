@@ -26,17 +26,23 @@
       lulu = rpi.lib.nixosSystem {
         specialArgs = inputs;
         modules = [ 
-          rpi.nixosModules.raspberry-pi-5.base
-          rpi.nixosModules.raspberry-pi-5.page-size-16k
-          rpi.nixosModules.raspberry-pi-5.display-vc4
-          rpi.nixosModules.raspberry-pi-5.bluetooth
+          ({ config, pkgs, lib, rpi, ... }: {
+            imports = with rpi.nixosModules; [
+              # Hardware configurations
+              raspberry-pi-5.base
+              raspberry-pi-5.page-size-16k
+              raspberry-pi-5.display-vc4
+              raspberry-pi-5.bluetooth
+              usb-gadget-ethernet # Configures USB Gadget/Ethernet - Ethernet emulation over USB
+             ./pi5-configtxt.nix
 
-          rpi.nixosModules.usb-gadget-ethernet # Configures USB Gadget/Ethernet - Ethernet emulation over USB
+              ];
+          })
 
-          ./pi5-configtxt.nix
-          
-          ./configuration.nix
-        
+          ./rasp_pi.nix # i think this needs to go into hardware configs up above
+       
+          ./configuration.nix # i think this also needs to move up ??????
+          { boot.loader.rpi.bootloader = "kernel"; } # overrides default in raspberry-pi-5.base from kernelboot        
         ];
       };
     };
