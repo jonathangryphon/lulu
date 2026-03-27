@@ -32,6 +32,7 @@
 
           usb-gadget-ethernet # Configures USB Gadget/Ethernet - Ethernet emulation over USB
 
+          ./pi5-configtxt.nix
           
           ./configuration.nix
         
