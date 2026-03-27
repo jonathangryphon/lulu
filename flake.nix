@@ -24,7 +24,6 @@
       inherit system;
 
       lulu = rpi.lib.nixosSystem {
-        specialArgs = inputs;
         modules = [ 
           ({ config, pkgs, lib, rpi, ... }: {
             imports = with rpi.nixosModules; [
