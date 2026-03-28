@@ -3,7 +3,13 @@
 {
   networking.networkmanager.enable = true;
 
-  networking.networkmanager.ensureProfiles.profiles = {
+  networking.networkmanager.ensureProfiles = {
+ 
+  environmentFiles = [
+    config.sops.secrets.home_wifi.path
+  ];  
+
+   profiles = {
     "home-wifi" = {
       connection = {
         id = "home-wifi";
@@ -14,8 +20,8 @@
       };
       ipv4 = { method = "auto"; };
       ipv6 = { method = "auto"; addrGenMode = "stable-privacy"; };
-      wifi = { mode = "infrastructure"; ssid = "Zvezda Wifi"; };
-      wifi-security = { keyMgmt = "wpa-psk"; pskFile = "/run/secrets/wifi/home-psk"; };
+      wifi = { mode = "infrastructure"; ssid = "$HOME_SSID"; };
+      wifi-security = { key-mgmt = "wpa-psk"; psk = "$HOME_PSK"; };
     };
 
     "nano-wifi" = {
@@ -46,5 +52,6 @@
       wifi-security = { keyMgmt = "wpa-psk"; pskFile = "/run/secrets/wifi/koshka-psk"; };
     };
   };
+};
 }
 
