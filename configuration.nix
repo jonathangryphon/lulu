@@ -37,8 +37,8 @@ in
   ############################
   # Boot
   ############################
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
 
   # ZFS Kernel Requirements
   boot.kernelModules = [ "zfs" ];
@@ -54,7 +54,7 @@ in
   # Networking & Firewall
   ############################
   # see modules/wifi.nix for Networking Configuration
-  networking.firewall.allowedTCPPorts = [ 80 443 ]; # ssh port is defined in /modules/ssh.nix
+  # networking.firewall.allowedTCPPorts = [ 80 443 ]; # ssh port is defined in /modules/ssh.nix
 
   ############################
   # Host & Timezone
@@ -82,6 +82,11 @@ in
       upper = "03:00";
     };
   };
+
+
+  nix.extraOptions = [
+    "experimental-features = nix-command flakes"
+  ];
 
   ############################
   # System Packages

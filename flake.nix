@@ -21,9 +21,11 @@
     system = "aarch64-linux";
   in { 
     nixosConfigurations = {
-      inherit system;
 
-      lulu = rpi.lib.nixosSystem {
+      lulu = rpi.lib.nixosSystemFull {
+        inherit system;
+        specialArgs = inputs;
+
         modules = [
           # raspberry-pi flake modules
           ({ config, pkgs, lib, rpi, ... }: {
@@ -41,10 +43,10 @@
           ./pi5-configtxt.nix
 
           # Change default bootloader according to documentation recommendation
-          { boot.loader.rpi.bootloader = "kernel"; }
+          { boot.loader.raspberry-pi.bootloader = "kernel"; }
        
           # Import all non-hardware related configurations (users, ssh, services, ... )
-          ./configuration.nix 
+#          ./configuration.nix 
         ];
       };
     };
