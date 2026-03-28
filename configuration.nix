@@ -81,12 +81,9 @@ in
       lower = "02:00";
       upper = "03:00";
     };
-  };
+  }; 
 
-
-  nix.extraOptions = [
-    "experimental-features = nix-command flakes"
-  ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   ############################
   # System Packages

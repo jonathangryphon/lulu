@@ -18,6 +18,4 @@
     description = "break glass account for emergency remediation";
     extraGroups = [ "wheel" ]; # sudo access
   };
-  
-  users.users.traefik.extraGroups = [ "podman" ];
 }
