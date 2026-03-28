@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     rpi.url = "github:nvmd/nixos-raspberrypi/main";
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   # Optional: Binary cache for the rpi flake
@@ -16,7 +18,7 @@
     ];
   };
 
-  outputs = { self, nixpkgs, rpi, ... }@ inputs: 
+  outputs = { self, nixpkgs, rpi, sops-nix, ... }@ inputs: 
   let
     system = "aarch64-linux";
   in { 
@@ -38,6 +40,9 @@
               usb-gadget-ethernet # Configures USB Gadget/Ethernet - Ethernet emulation over USB
               ];
           })
+          
+          sops-nix.nixosModules.sops
+
           # personal additions 
           ./hardware-configuration.nix
  
