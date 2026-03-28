@@ -39,6 +39,8 @@
               ];
           })
           # personal additions 
+          ./hardware-configuration.nix
+ 
           # my pi5 config.txt 
           ./pi5-configtxt.nix
 
