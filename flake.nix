@@ -24,7 +24,8 @@
       inherit system;
 
       lulu = rpi.lib.nixosSystem {
-        modules = [ 
+        modules = [
+          # raspberry-pi flake modules
           ({ config, pkgs, lib, rpi, ... }: {
             imports = with rpi.nixosModules; [
               # Hardware configurations
@@ -33,15 +34,17 @@
               raspberry-pi-5.display-vc4
               raspberry-pi-5.bluetooth
               usb-gadget-ethernet # Configures USB Gadget/Ethernet - Ethernet emulation over USB
-             ./pi5-configtxt.nix
-
               ];
           })
+          # personal additions 
+          # my pi5 config.txt 
+          ./pi5-configtxt.nix
 
-          ./rasp_pi.nix # i think this needs to go into hardware configs up above
+          # Change default bootloader according to documentation recommendation
+          { boot.loader.rpi.bootloader = "kernel"; }
        
-          ./configuration.nix # i think this also needs to move up ??????
-          { boot.loader.rpi.bootloader = "kernel"; } # overrides default in raspberry-pi-5.base from kernelboot        
+          # Import all non-hardware related configurations (users, ssh, services, ... )
+          ./configuration.nix 
         ];
       };
     };
