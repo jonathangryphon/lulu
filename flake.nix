@@ -46,7 +46,7 @@
           { boot.loader.raspberry-pi.bootloader = "kernel"; }
        
           # Import all non-hardware related configurations (users, ssh, services, ... )
-#          ./configuration.nix 
+          ./configuration.nix 
         ];
       };
     };
