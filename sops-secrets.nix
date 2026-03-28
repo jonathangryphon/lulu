@@ -9,6 +9,11 @@
     sopsFile = ./secrets/porkbun_secrets.yaml;
   };
 
+  sops.secrets.home_wifi = {
+    sopsFile = ./secrets/home-wifi.env.enc;
+    format = "dotenv";
+  };
+
   sops.secrets."wifi/home-wifi/psk" = { 
     sopsFile = ./secrets/wifi_secrets.yaml;
   };
